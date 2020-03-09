@@ -5,11 +5,7 @@ import classes from './modal.module.scss';
 
 class Modal extends Component<any>{
     shouldComponentUpdate(nextProps: any, nextState: any) {
-        return nextProps.show !== this.props.show
-    }
-
-    componentDidUpdate() {
-        console.log('modal')
+        return nextProps.show !== this.props.show || nextProps.children !== this.props.children
     }
 
     render() {
