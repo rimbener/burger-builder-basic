@@ -14,3 +14,8 @@
   margin-left: 0;
   padding-left: 0;
 }
+
+.Button:disabled {
+  color: #ccc;
+  cursor: not-allowed;
+}
