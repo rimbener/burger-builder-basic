@@ -1,0 +1,21 @@
+
+331. Preparing the Folder Structure
+332. Creating Action Creators
+333. Executing Asynchronous Code
+334. Fetching Ingredients Asynchronously
+335. Initializing Ingredients in the BurgerBuilder
+336. Changing the Order of our Ingredients Manually
+337. Adding Order Actions
+338. Connecting Contact Data Container & Actions
+339. The Order Reducer
+340. Working on Order Actions
+341. Redirect to Improve UX
+342. Combining Reducers
+343. Handling Purchases & Updating the UI
+344. Resetting the Price after Purchases
+345. Fetching Orders (via Redux)
+346. Checking our Implemented Functionalities
+347. Refactoring Reducers
+348. Refactoring Reducers Continued
+349. Wrap Up
+350. Useful Resources & Links

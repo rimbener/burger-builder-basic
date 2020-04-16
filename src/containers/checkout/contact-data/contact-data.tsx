@@ -4,6 +4,7 @@ import SuccessButton from '../../../components/ui/buttons/success-button/success
 import classes from './contact-data.module.scss';
 import Spinner from '../../../components/spinner/spinner';
 import Input from '../../../components/ui/input/input';
+import { connect } from 'react-redux';
 
 const formElementConfig = (elementType: string, elementConfig: any, defaultValue: string, validationConfig?: any) => {
     const validity = validationConfig === undefined ? true : false;
@@ -70,7 +71,7 @@ class ContactData extends Component<any, any> {
             formData[elemId] = this.state.orderForm[elemId].value
         }
         const order = {
-            ingredients: this.props.ingredients,
+            ingredients: this.props.ings,
             price: parseFloat(this.props.price.toFixed(2)),
             order: formData
         };
@@ -173,4 +174,11 @@ class ContactData extends Component<any, any> {
     }
 }
 
-export default ContactData;
+const mapStateToProps = (state: any) => {
+    return {
+        ings: state.ingredients,
+        price: state.totalPrice
+    }
+}
+
+export default connect(mapStateToProps)(ContactData);
