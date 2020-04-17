@@ -3,7 +3,7 @@ import Layout from './hoc/layout/layout';
 import BurgerBuilder from './containers/burger-builder/burger-builder';
 import { Route, Switch } from 'react-router-dom';
 import Checkout from './containers/checkout/checkout';
-import Orders from './containers/checkout/orders/orders';
+import Orders from './containers/orders/orders';
 
 const App: React.FC = () => {
   return (

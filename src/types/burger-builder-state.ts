@@ -1,4 +1,5 @@
 export interface BurgerBuilderState {
     ingredients: Record<string, any>,
-    totalPrice: number
+    totalPrice: number,
+    error: boolean
 }

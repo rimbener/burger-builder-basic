@@ -1,21 +1,22 @@
-
-331. Preparing the Folder Structure
-332. Creating Action Creators
-333. Executing Asynchronous Code
-334. Fetching Ingredients Asynchronously
-335. Initializing Ingredients in the BurgerBuilder
-336. Changing the Order of our Ingredients Manually
-337. Adding Order Actions
-338. Connecting Contact Data Container & Actions
-339. The Order Reducer
-340. Working on Order Actions
-341. Redirect to Improve UX
-342. Combining Reducers
-343. Handling Purchases & Updating the UI
-344. Resetting the Price after Purchases
-345. Fetching Orders (via Redux)
-346. Checking our Implemented Functionalities
-347. Refactoring Reducers
-348. Refactoring Reducers Continued
-349. Wrap Up
-350. Useful Resources & Links
+321. Module Introduction
+322. Understanding Authentication in Single Page Applications
+323. Required App Adjustments
+324. Adding an Auth Form
+325. Adding Actions
+326. Getting a Token from the Backend
+327. Adding Sign-In
+328. Storing the Token
+329. Adding a Spinner
+330. Logging Users Out
+331. Accessing Protected Resources
+332. Updating the UI Depending on Auth State
+333. Adding a Logout Link
+334. Forwarding Unauthenticated Users
+335. Redirecting the User to the Checkout Page
+336. Persistent Auth State with localStorage
+337. Fixing Connect + Routing Errors
+338. Ensuring App Security
+339. Guarding Routes
+340. Displaying User Specific Orders
+341. Wrap Up
+342. Useful Resources & Links
