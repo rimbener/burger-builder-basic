@@ -1,55 +1,21 @@
 import React, { Component } from 'react';
-import axios from '../../../axios-order';
-import SuccessButton from '../../../components/ui/buttons/success-button/success-button';
-import classes from './contact-data.module.scss';
-import Spinner from '../../../components/spinner/spinner';
-import Input from '../../../components/ui/input/input';
 import { connect } from 'react-redux';
+import axios from '../../../axios-order';
+import Spinner from '../../../components/spinner/spinner';
+import SuccessButton from '../../../components/ui/buttons/success-button/success-button';
+import Input from '../../../components/ui/input/input';
 import withErrorHandler from '../../../hoc/with-error-handler/with-error-handler';
+import { formElementConfig, inputConfig, maxLength, minLength, isRequired } from '../../../shared/form-element-config';
 import * as actions from '../../../store/actions';
+import classes from './contact-data.module.scss';
 
-const formElementConfig = (elementType: string, elementConfig: any, defaultValue: string, validationConfig?: any) => {
-    const validity = validationConfig === undefined ? true : false;
-    return {
-        elementType,
-        elementConfig,
-        defaultValue,
-        validation: {
-            ...validationConfig,
-        },
-        value: defaultValue,
-        valid: validity,
-        touched: false
-    }
-}
-const inputElementConfig = (placeholder: string, type = 'text') => {
-    return {
-        type,
-        placeholder
-    }
-}
-const requiredElementConfig = () => {
-    return {
-        required: true
-    }
-}
-const minLengthElementConfig = (min: number) => {
-    return {
-        minLength: min
-    }
-}
-const maxLengthElementConfig = (max: number) => {
-    return {
-        maxLength: max,
-    }
-}
 
 const orderForm: Record<string, any> = {
-    name: formElementConfig('input', inputElementConfig('Your Name'), '', { ...requiredElementConfig() }),
-    street: formElementConfig('input', inputElementConfig('Your Street'), '', { ...requiredElementConfig() }),
-    zipCode: formElementConfig('input', inputElementConfig('Your PostalCode'), '', { ...requiredElementConfig(), ...minLengthElementConfig(4), ...maxLengthElementConfig(6) }),
-    country: formElementConfig('input', inputElementConfig('Your Country'), '', { ...requiredElementConfig() }),
-    email: formElementConfig('input', inputElementConfig('Your E-Mail', 'email'), '', { ...requiredElementConfig() }),
+    name: formElementConfig('input', inputConfig('Your Name'), '', { ...isRequired() }),
+    street: formElementConfig('input', inputConfig('Your Street'), '', { ...isRequired() }),
+    zipCode: formElementConfig('input', inputConfig('Your PostalCode'), '', { ...isRequired(), ...minLength(4), ...maxLength(6) }),
+    country: formElementConfig('input', inputConfig('Your Country'), '', { ...isRequired() }),
+    email: formElementConfig('input', inputConfig('Your E-Mail', 'email'), '', { ...isRequired() }),
     deliveryMethod: formElementConfig('select', {
         options: [
             { value: 'fastest', displayValue: 'Fastest' },
@@ -74,9 +40,10 @@ class ContactData extends Component<any, any> {
         const order = {
             ingredients: this.props.ings,
             price: parseFloat(this.props.price.toFixed(2)),
-            order: formData
+            order: formData,
+            userId: this.props.userId
         };
-        this.props.onOrderBurger(order);
+        this.props.onOrderBurger(order, this.props.token);
     }
 
     inputChangedHandler = (event: any, id: string) => {
@@ -171,13 +138,15 @@ const mapStateToProps = (state: any) => {
     return {
         ings: state.burgerBuilder.ingredients,
         price: state.burgerBuilder.totalPrice,
-        loading: state.order.loading
+        loading: state.order.loading,
+        token: state.auth.token,
+        userId: state.auth.userId
     }
 }
 
 const mapDispatchToProps = (dispatch: any) => {
     return {
-        onOrderBurger: (orderData: any) => dispatch(actions.purchaseBurger(orderData))
+        onOrderBurger: (orderData: any, token: string) => dispatch(actions.purchaseBurger(orderData, token))
     }
 }
 

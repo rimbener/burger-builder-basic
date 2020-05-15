@@ -1,0 +1,11 @@
+{
+    "firebaseConfig": {
+        "apiKey": "AIzaSyDFN8kgpbIS9_e3F9_TOdHGmCNTERPeBTE",
+        "authDomain": "react-my-burger-hel.firebaseapp.com",
+        "databaseURL": "https://react-my-burger-hel.firebaseio.com",
+        "projectId": "react-my-burger-hel",
+        "storageBucket": "react-my-burger-hel.appspot.com",
+        "messagingSenderId": "341612494147",
+        "appId": "1:341612494147:web:7133b375cb3c566e18c3f6"
+    }
+}

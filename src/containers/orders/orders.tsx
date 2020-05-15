@@ -13,7 +13,7 @@ class Orders extends Component<any, any>  {
     }
 
     componentDidMount() {
-        this.props.onFetchOrders();
+        this.props.onFetchOrders(this.props.token, this.props.userId);
     }
     render() {
         let orders = <Spinner />;
@@ -33,12 +33,14 @@ class Orders extends Component<any, any>  {
 const mapStateToProps = (state: any) => {
     return {
         orders: state.order.orders,
-        loading: state.order.loading
+        loading: state.order.loading,
+        token: state.auth.token,
+        userId: state.auth.userId
     }
 }
 const mapDispatchToProps = (dispatch: any) => {
     return {
-        onFetchOrders: () => dispatch(actions.fetchOrders())
+        onFetchOrders: (token: string, userId: string) => dispatch(actions.fetchOrders(token, userId))
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(withErrorHandler(Orders, axios));

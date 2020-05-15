@@ -2,20 +2,22 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
-import { applyMiddleware, createStore, combineReducers } from 'redux';
+import { applyMiddleware, combineReducers, createStore } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
+import thunk from 'redux-thunk';
 import App from './App';
 import './index.scss';
 import * as serviceWorker from './serviceWorker';
+import authReducer from './store/reducers/auth.reducer';
 import burgerBuilderReducer from './store/reducers/burger-builder.reducer';
 import orderReducer from './store/reducers/order.reducer';
-import thunk from 'redux-thunk';
 
 const composeEnhancers = composeWithDevTools({});
 
 const rootReducer = combineReducers({
     burgerBuilder: burgerBuilderReducer,
-    order: orderReducer
+    order: orderReducer,
+    auth: authReducer
 })
 const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)));
 
