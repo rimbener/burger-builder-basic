@@ -1,13 +1,15 @@
-import React, { Component } from 'react';
+import React, { Component, Suspense, lazy } from 'react';
 import { connect } from 'react-redux';
 import { Route, Switch, withRouter, Redirect } from 'react-router-dom';
-import Auth from './containers/auth/auth';
 import Logout from './containers/auth/logout/logout';
 import BurgerBuilder from './containers/burger-builder/burger-builder';
-import Checkout from './containers/checkout/checkout';
-import Orders from './containers/orders/orders';
 import Layout from './hoc/layout/layout';
 import { authCheckState } from './store/actions';
+import Spinner from './components/spinner/spinner';
+
+const Auth = lazy(() => import('./containers/auth/auth'));
+const Checkout = lazy(() => import('./containers/checkout/checkout'));
+const Orders = lazy(() => import('./containers/orders/orders'));
 
 class App extends Component<any, any> {
 
@@ -18,22 +20,27 @@ class App extends Component<any, any> {
   render() {
 
     let routes = (
-      <Switch>
-        <Route path="/auth" component={Auth} />
-        <Route path="/" exact component={BurgerBuilder} />
-        <Redirect to="/"></Redirect>
-      </Switch>
+      <Suspense fallback={<Spinner />}>
+        <Switch>
+          <Route path="/auth" component={Auth} />
+          <Route path="/" exact component={BurgerBuilder} />
+          <Redirect to="/"></Redirect>
+        </Switch>
+      </Suspense>
     );
 
     if (this.props.isAuthenticated) {
       routes = (
-        <Switch>
-          <Route path="/checkout" component={Checkout} />
-          <Route path="/orders" component={Orders} />
-          <Route path="/logout" component={Logout} />
-          <Route path="/" exact component={BurgerBuilder} />
-          <Redirect to="/"></Redirect>
-        </Switch>
+        <Suspense fallback={<Spinner />}>
+          <Switch>
+            <Route path="/auth" component={Auth} />
+            <Route path="/checkout" component={Checkout} />
+            <Route path="/orders" component={Orders} />
+            <Route path="/logout" component={Logout} />
+            <Route path="/" exact component={BurgerBuilder} />
+            <Redirect to="/"></Redirect>
+          </Switch>
+        </Suspense>
       )
     }
 

@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
+import Spinner from '../../components/spinner/spinner';
 import DangerButton from '../../components/ui/buttons/danger-button/danger-button';
 import SuccessButton from '../../components/ui/buttons/success-button/success-button';
 import Input from '../../components/ui/input/input';
+import checkValidity from '../../shared/check-validity';
 import { formElementConfig, inputConfig, isRequired, minLength } from '../../shared/form-element-config';
 import { auth, setAuthRedirectPath } from '../../store/actions';
 import classes from './auth.module.scss';
-import Spinner from '../../components/spinner/spinner';
-import { Redirect } from 'react-router-dom';
 
 const controls: Record<string, any> = {
     email: formElementConfig('input', inputConfig('Your E-Mail', 'email'), 'test@test.com', { ...isRequired() }),
@@ -31,41 +32,11 @@ export class Auth extends Component<any, any> {
             [controlName]: {
                 ...this.state.controls[controlName],
                 value: event.target.value,
-                valid: this.checkValidity(event.target.value, this.state.controls[controlName].validation),
+                valid: checkValidity(event.target.value, this.state.controls[controlName].validation),
                 touched: true
             }
         }
         this.setState({ controls: updatedControls });
-    }
-
-    checkValidity(value: string, rules: any) {
-        let isValid = true;
-        let errorMessage = null;
-
-        if (rules.required) {
-            isValid = value.trim() !== '' && isValid;
-            if (!isValid) {
-                errorMessage = 'This field is required';
-            }
-        }
-
-        if (rules.minLength) {
-            isValid = value.length >= rules.minLength && isValid;
-            if (!isValid) {
-                errorMessage = 'The min length for this field is: ' + rules.minLength.toString();
-                return { isValid, errorMessage };
-            }
-        }
-
-        if (rules.maxLength) {
-            isValid = value.length <= rules.maxLength && isValid;
-            if (!isValid) {
-                errorMessage = 'The max length for this field is: ' + rules.maxLength.toString();
-                return { isValid, errorMessage };
-            }
-        }
-
-        return { isValid, errorMessage };
     }
 
     submitHandler = (event: any) => {

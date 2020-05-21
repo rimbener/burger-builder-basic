@@ -5,10 +5,10 @@ import Spinner from '../../../components/spinner/spinner';
 import SuccessButton from '../../../components/ui/buttons/success-button/success-button';
 import Input from '../../../components/ui/input/input';
 import withErrorHandler from '../../../hoc/with-error-handler/with-error-handler';
-import { formElementConfig, inputConfig, maxLength, minLength, isRequired } from '../../../shared/form-element-config';
+import checkValidity from '../../../shared/check-validity';
+import { formElementConfig, inputConfig, isRequired, maxLength, minLength } from '../../../shared/form-element-config';
 import * as actions from '../../../store/actions';
 import classes from './contact-data.module.scss';
-
 
 const orderForm: Record<string, any> = {
     name: formElementConfig('input', inputConfig('Your Name'), '', { ...isRequired() }),
@@ -54,7 +54,7 @@ class ContactData extends Component<any, any> {
             ...updatedOrderForm[id]
         }
         updatedFormElement.value = event.target.value;
-        const { isValid, errorMessage } = this.checkValidity(updatedFormElement.value, updatedFormElement.validation);
+        const { isValid, errorMessage } = checkValidity(updatedFormElement.value, updatedFormElement.validation);
         updatedFormElement.valid = isValid;
         updatedFormElement.errorMessage = errorMessage;
         updatedFormElement.touched = true;
@@ -65,36 +65,6 @@ class ContactData extends Component<any, any> {
             formIsValid = updatedOrderForm[input].valid && formIsValid;
         }
         this.setState({ orderForm: updatedOrderForm, formIsValid });
-    }
-
-    checkValidity(value: string, rules: any) {
-        let isValid = true;
-        let errorMessage = null;
-
-        if (rules.required) {
-            isValid = value.trim() !== '' && isValid;
-            if (!isValid) {
-                errorMessage = 'This field is required';
-            }
-        }
-
-        if (rules.minLength) {
-            isValid = value.length >= rules.minLength && isValid;
-            if (!isValid) {
-                errorMessage = 'The min length for this field is: ' + rules.minLength.toString();
-                return { isValid, errorMessage };
-            }
-        }
-
-        if (rules.maxLength) {
-            isValid = value.length <= rules.maxLength && isValid;
-            if (!isValid) {
-                errorMessage = 'The max length for this field is: ' + rules.maxLength.toString();
-                return { isValid, errorMessage };
-            }
-        }
-
-        return { isValid, errorMessage };
     }
 
     render() {
