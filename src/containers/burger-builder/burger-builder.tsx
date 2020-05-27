@@ -10,7 +10,7 @@ import Aux from '../../hoc/aux/aux';
 import withErrorHandler from '../../hoc/with-error-handler/with-error-handler';
 import * as actions from '../../store/actions';
 
-class BurgerBuilder extends Component<any, any> {
+export class BurgerBuilder extends Component<any, any> {
     state = {
         purchasing: false
     }

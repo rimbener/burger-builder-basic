@@ -46,7 +46,12 @@
     ]
   },
   "devDependencies": {
+    "@types/enzyme": "^3.10.5",
+    "@types/enzyme-adapter-react-16": "^1.0.6",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.2",
     "node-sass": "^4.13.1",
+    "react-test-renderer": "^16.13.1",
     "typings-for-css-modules-loader": "^1.7.0"
   }
 }
