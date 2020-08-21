@@ -1,0 +1,15 @@
+400. Module Introduction.mp4
+401. Introducing Webpack.mp4
+402. How Webpack works.mp4
+403. Basic Workflow Requirements.mp4
+404. Project & npm Setup.mp4
+405. Creating a Basic Folder & File Structure.mp4
+406. Creating the Basic React Application.mp4
+407. Installing Production Dependencies.mp4
+408. Setting Up the Basic Webpack Config.mp4
+409. Adding File Rules & Babel.mp4
+410. Loading CSS Files.mp4
+411. Loading Images & Injecting into HTML Page.mp4
+412. Production Workflow & Wrap Up.mp4
+413. Adding babel-polyfill.mp4
+414. Useful Resources & Links.mp4
